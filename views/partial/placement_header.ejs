@@ -21,23 +21,26 @@
 </nav>
 
 <nav class = "abc">
-    <a href="http://localhost:2000/placement/dashboard?token=<%= token %>">Home</a>
+    <!-- <a href="http://localhost:2000/placement/dashboard?token=<%= token %>">Home</a>
     
       
             
             <a href="http://localhost:2000/placement/display_student?token=<%= token %>">Display Students</a>
             <a href="http://localhost:2000/placement/eligible_list?token=<%= token %>">Get Student List</a>
-        
+         -->
+         <a href="/placement/dashboard?token=<%= token %>">Home</a>
+         <a href="/placement/display_student?token=<%= token %>">Display Students</a>
+         <a href="/placement/eligible_list?token=<%= token %>">Get Student List</a>
       
       <li class="dropdown">
         <a href="#" class="dropbtn">Slots</a>
         <div class="dropdown-content">
-            <a href="http://localhost:2000/placement/add_events?token=<%= token %>">Add exam/interview slots</a>
-            <a href="http://localhost:2000/placement/display_events?token=<%= token %>">Display all slots</a>
+          <a href="/placement/add_events?token=<%= token %>">Add exam/interview slots</a>
+          <a href="/placement/display_events?token=<%= token %>">Display all slots</a>
         </div>
       </li>
-      <a href="http://localhost:2000/placement/approve?token=<%= token %>">Approvals</a>
-    <a href="http://localhost:2000/placement/feedback_send?token=<%= token %>">FeedBack</a>
+      <a href="/placement/approve?token=<%= token %>">Approvals</a>
+      <a href="/placement/feedback_send?token=<%= token %>">FeedBack</a>
     
     <a href = "/placement_login">LogOut</a>
 </nav>
