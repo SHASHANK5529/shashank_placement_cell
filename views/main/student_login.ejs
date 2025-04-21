@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Cell Login</title>
+    <style>
+        .container a{
+            color:black;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+        }
+
+        .container {
+            max-width: 450px;
+            margin: 50px auto;
+            padding: 50px;
+            border: 2px solid rgba(255,255,255,0.18);
+            background: linear-gradient(135deg,rgba(255,255,255,0.1),rgba(255,255,255,0));
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            background-position: relative;
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+
+        }
+
+        .container h1 {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .container input[type="text"],
+        .container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+
+        .container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .container button:hover {
+            background-color: #003399;
+        }
+
+        .container .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+        label{
+    font-weight: bold;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Student Login</h1>
+        <form action="" method="POST">
+            <div>
+                <label for="Roll_number">Roll Number : </label>
+                <input type="text" name="Roll_number" placeholder="Roll_number" required>
+            </div>
+            <div>
+                <label for="password"> Password : </label>
+                <input type="password" name="password"  placeholder="Password" required>
+            </div>
+            <button type="submit" value="Login" class="btn">Login</button>
+        </form>
+        <div class="error" id="error"></div>
+        <a href="/">If Your not Student  </a>
+    </div>
+    
+</body>
+</html>

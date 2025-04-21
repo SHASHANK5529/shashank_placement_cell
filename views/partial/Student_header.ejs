@@ -1,0 +1,63 @@
+<header>
+    <img src="/img/l.gif" width="90">
+    <div>
+        <h1 style="color:lightblue;"> Vasavi College of Engineering</h1>
+        <em>
+            (Private Un-aided Non-minority Autonomous Institution)
+            <br>
+            <span style="color:red;">ACCREDITED BY NAAC WITH 'A++' GRADE</span>
+            <br>
+            Affiliated to Osmania University and Approved by AICTE.
+        </em>
+    </div>
+    <br>
+    <br>
+    <br>
+</header>
+<nav>
+    <ul>
+        <dl><a href="http://localhost:2000/Student/mainpage?token=<%= token %>">Home</a></dl> 
+        <dl><a href="http://localhost:2000/view_profile?token=<%= token %>">View Profile</a></dl>
+        <dl><a href="http://localhost:2000/Dashboard?token=<%= token %>">Calendar</a></dl>
+        <dl><a href="http://localhost:2000/inbox?token=<%= token %>">Inbox</a></dl>
+        <dl><a href="http://localhost:2000/placement_login">LogOut</a></dl>
+    </ul>
+</nav>
+<style>
+    .em{
+        color:grey;
+    }
+    a{
+        color:aliceblue;
+        text-decoration: none;
+    }
+    img{
+        max-width:100%;
+        height: auto;
+
+    }   
+    header {
+    background-color:aliceblue;
+    color: grey;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+header h1 {
+    margin: 0;
+}
+nav ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0px;
+    width:100%;
+    background-color: #0066cc;
+    justify-content: space-around;
+}
+
+nav ul li {
+    margin-right: 0rem;
+}
+</style>

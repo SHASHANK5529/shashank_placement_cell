@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <style>
+        body{
+            font-size: larger;
+        }
+        .details{
+            padding: 0px 0px 5px 7%;
+        }
+        /* Custom styles for .pro-container */
+        .pro-container {
+            padding: 20px; /* Add padding to the container */
+            background-color: #f8f9fa; /* Add a light background color */
+            border: 1px solid #dee2e6; /* Add a border */
+            border-radius: 5px; /* Add border radius */
+        }
+
+h4 {
+    color: #333;
+}
+/*
+form {
+    display: inline-block;
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 5px;
+}   */
+
+input[type="file"] {
+    display: block;
+    margin: 10px 0;
+}
+
+button {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+    </style>
+</head>
+<body>
+    <h1 class="text-center">Student Profile</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="pro-container">
+                    <p><strong>Name:</strong> <%= student.Name %></p>
+                    <p><strong>Roll Number:</strong> <%= student.Roll_number %></p>
+                    <p><strong>Gender:</strong> <%= student.Gender %></p>
+                    <p><strong>CGPA:</strong> <%= student.CGPA %></p>
+                    <p><strong>Section:</strong><%= student.Section  %></p>
+                    <p><Strong>Admission:</Strong><%= student.Admission  %></p>
+                    <p><strong>Semester:</strong><%=student.Semester %></p>
+                    <p><strong>Year:</strong><%= student.Year %></p>
+                    <p><Strong>Date Of Birth:</Strong><%= student.Dob  %></p>
+                    <p><strong>EamcetRank:</strong><%= student.EamcetRank %></p>
+                    <p><strong>JeeMains Rank:</strong><%= student.MainsRank %></p>
+                    <p><strong>Branch:</strong><%= student.Branch %></p>
+                    <!-- Add other details as needed -->
+                    <h4>Upload Your Resume</h4>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="resume">Resume:</label>
+        <input type="file" id="resume" name="resume" required>
+        <button type="submit">Upload</button>
+    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

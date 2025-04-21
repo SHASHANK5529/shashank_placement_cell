@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement Calendar</title>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css' rel='stylesheet' />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js'></script>
+
+    <style>
+        .full{
+            width : 90%;
+            padding-left: 5%;
+        }
+
+        #calendar .fc-day, .fc-day-grid{
+            border:1px solid black;
+        }
+
+        #calendar .fc-event{
+            border : 1px solid black;
+            background-color: lightgray;
+            color : black;
+        }
+
+        #calendar .fc-day-header{
+            border : 1px solid black;
+        }
+
+        #calendar .fc-row:first-of-type {
+            border-top: 1px solid black;
+        }
+
+
+    </style>
+</head>
+<body>
+    <center><h1><%= x.Name %>'s Calendar!</h1></center>
+    <div id="calendar" class="full"></div>
+
+    <script>
+        const studentGender = '<%= x.Gender %>';
+        const studentCGPA = '<%= x.CGPA %>' ;
+        const student_rollno = '<%= x.Roll_number %>';
+        const studentbranch = '<%= x.Branch %>';
+        console.log(studentCGPA);
+        $(document).ready(function() {
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                defaultView: 'month',
+                displayEventTime: true,
+                defaultDate: new Date(),
+                events: '/events?gender=' + studentGender + '&cgpa=' + studentCGPA + '&Roll_numbers='+student_rollno + '&branch='+studentbranch,
+                eventRender: function(event, element) {
+
+                    if (event.end < new Date()) {
+                // Change the background color of past events to red
+                element.css('background-color', 'chartreuse');
+                }
+                    // This function can be used to customize event rendering if needed
+                    // Here, you can modify the title or appearance of each event
+                    var startTime = event.start.format('YYYY-MM-DD HH:mm');
+                    var endTime = event.end.format('YYYY-MM-DD HH:mm');
+                    if (event.start.format('YYYY-MM-DD') !== event.end.format('YYYY-MM-DD')) {
+                        endTime = event.start.endOf('day').format('YYYY-MM-DD HH:mm');
+                    }
+                    event.title = startTime + ' - ' + endTime;
+                },
+                eventClick: function(event) {
+                    // Handle event click actions if needed
+                    window.console.log(event.Gender);
+                    if (event.href) {
+                        window.open(event.href, '_blank');
+                    } else {
+                        alert('Event clicked: ' + event.title + event.href);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

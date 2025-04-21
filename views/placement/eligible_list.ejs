@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Feedback Form</h1>
+
+        <form id="reg" action="/placement/eligible_students" method="GET">
+            <div>
+                <label for="subject">Event Name:</label>
+                <select id="subject" name="id" required>
+                    <!-- Options will be dynamically populated here -->
+                </select>
+            </div>
+            
+            <input type="hidden" name="token" value="<%= token %>">
+
+            <button type="submit">Get Students</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/student/events') // Assuming the route is '/student/events' and it returns event data
+                .then(response => response.json())
+                .then(events => {
+                    const selectElement = document.getElementById('subject');
+                    events.forEach(event => {
+                        const option = document.createElement('option');
+                        option.value = event._id; // Assuming '_id' is the unique identifier for events
+                        option.textContent = event.title; // Assuming 'title' is the name/title of the event
+                        selectElement.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching events:', error));
+        });
+    </script>
+
+    <style>
+        a {
+            color: aqua;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+        }
+        .container {
+            max-width: 450px;
+            margin: 50px auto;
+            padding: 30px 50px;
+            border: 2px solid rgba(255, 255, 255, 0.18);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            background-position: relative;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+        }
+        .container h1 {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .container input[type="text"],
+        .container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        .container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .container button:hover {
+            background-color: #003399;
+        }
+        .container .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+        label {
+            font-weight: bold;
+        }
+        button[type="submit"] {
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .dropdown {
+            float: left;
+            position: bottom;
+        }
+        .dropdown1 {
+            width: 100%;
+        }
+        .dropdown-menu {
+            display: flex;
+            flex-direction: row;
+            gap: 50px;
+            margin-top: 10px;
+        }
+    </style>
+</body>
+</html>

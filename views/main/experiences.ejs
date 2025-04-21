@@ -1,0 +1,142 @@
+<section class="articles">
+<div class="search-container">
+  <h1>Experiences</h1>
+  <div class="search-wrapper">
+      <input type="text" id="searchInput" placeholder="Search titles or event names..." class="rounded-lg border-gray-300 dark:border-gray-700 focus:ring-blue-500 focus:border-blue-500 h-10 px-4">
+      <button id="searchButton">Search</button>
+  </div>
+  
+</div>
+      <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 hello">
+        <ul class="ul">
+          <% data.forEach(post => { %>
+            
+            <li>
+              <a href = "/exp/<%=post._id %>" class="feed">
+                <span><h3><%= post.Title %></h3><h5><%= post.Event_name %></h5><p><%= post.Roll_number %></p></span>
+                <span class="article-list"><%= post.createAt.toDateString() %></span>
+              </a> 
+              <hr class="hr">
+  
+
+          </li>
+        
+          <% }) %>
+          
+        </ul>
+        </div>
+
+      </div>
+<script>
+// Get the input element and search button
+const searchInput = document.getElementById('searchInput');
+const searchButton = document.getElementById('searchButton');
+
+// Add click event listener to search button
+searchButton.addEventListener('click', function() {
+    const searchText = searchInput.value.toLowerCase(); // Convert input value to lowercase for case-insensitive search
+    const articles = document.querySelectorAll('.articles .ul li');
+
+    articles.forEach(article => {
+        const title = article.querySelector('h3').textContent.toLowerCase(); // Get the title text and convert it to lowercase
+        const eventName = article.querySelector('p').textContent.toLowerCase();
+        const roll = article.querySelector('h5').textContent.toLowerCase(); // Get the event name text and convert it to lowercase
+        // If either the title or event name contains the search text, display the article; otherwise, hide it
+        if (title.includes(searchText) || eventName.includes(searchText) || roll.includes(searchText)) {
+            article.style.display = 'block';
+        } else {
+            article.style.display = 'none';
+        }
+    });
+});
+
+
+</script>
+     <style>
+
+      .hello a{
+        color : black;
+      }
+
+      .ul li{
+        margin : 0;
+        padding : 0;
+        line-gap-override: None;
+      }
+
+      .hr{
+        margin : 0;
+        border: none;           /* Remove the default border */
+  height: 1px;            /* Set the height to 1px for a thin line */
+  background-color: #B5C0D0; /* Set the background color to black (or any color you prefer) */
+              /* Remove any default margins */
+  padding: 0;  
+  width : 750px; 
+      }
+
+      .feed{
+        max-width: 700px;
+        margin: 0;
+        padding: 0;
+        display : flex;
+        justify-content: space-between;
+      }
+
+      .ul{
+        padding : 0px 350px;
+        list-style-type: none;
+      }
+
+    .articles {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    max-width: 95%;
+    margin-bottom: 1rem;
+    
+}
+.article-list {
+  padding-top: 30px;
+    font-size : 14px;
+    color : var(--grey);
+    width : 100px;
+    display : inline-block;
+}
+
+h1{
+  padding-left: 5%;
+}
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+#searchInput {
+    margin-right: 0.5rem;
+    padding: 0.5rem;
+}
+
+#searchButton {
+    padding: 0.5rem 1rem;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#searchButton:hover {
+    background-color: #45a049;
+}
+
+     
+
+    
+      </style>
+      </section>

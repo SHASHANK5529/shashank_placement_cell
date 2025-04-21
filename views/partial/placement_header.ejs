@@ -1,0 +1,172 @@
+<header>
+    <img src="/img/l.gif" width="90">
+    <div>
+        <h1 style="color:lightblue;"> Vasavi College of Engineering</h1>
+        <em>
+            (Private Un-aided Non-minority Autonomous Institution)
+            <br>
+            <span style="color:red;">ACCREDITED BY NAAC WITH 'A++' GRADE</span>
+            <br>
+            Affiliated to Osmania University and Approved by AICTE.
+        </em>
+    </div>
+    <br>
+    <br>
+    <br>
+</header>
+<nav>
+    <ul>
+        <dl></dl>
+    </ul>
+</nav>
+
+<nav class = "abc">
+    <a href="http://localhost:2000/placement/dashboard?token=<%= token %>">Home</a>
+    
+      
+            
+            <a href="http://localhost:2000/placement/display_student?token=<%= token %>">Display Students</a>
+            <a href="http://localhost:2000/placement/eligible_list?token=<%= token %>">Get Student List</a>
+        
+      
+      <li class="dropdown">
+        <a href="#" class="dropbtn">Slots</a>
+        <div class="dropdown-content">
+            <a href="http://localhost:2000/placement/add_events?token=<%= token %>">Add exam/interview slots</a>
+            <a href="http://localhost:2000/placement/display_events?token=<%= token %>">Display all slots</a>
+        </div>
+      </li>
+      <a href="http://localhost:2000/placement/approve?token=<%= token %>">Approvals</a>
+    <a href="http://localhost:2000/placement/feedback_send?token=<%= token %>">FeedBack</a>
+    
+    <a href = "/placement_login">LogOut</a>
+</nav>
+
+<style>
+    .em {
+        color: grey;
+    }
+    a {
+        color: aliceblue;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    header {
+        background-color: aliceblue;
+        color: grey;
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem;
+    }
+    nav.abc {
+        background-color: #333;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-around;
+    }
+    nav.abc a {
+        float: left;
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+    }
+    nav.abc a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+    .content.abc {
+        padding: 20px;
+    }
+    header h1 {
+        margin: 0;
+    }
+    nav ul {
+        display: flex;
+        list-style-type: none;
+        margin: 0;
+        padding: 0px;
+        width: 100%;
+        background-color: #0066cc;
+        justify-content: space-around;
+    }
+    nav ul li {
+        margin-right: 0rem;
+    }
+    .navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar ul li {
+  float: left;
+}
+
+.navbar ul li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+.navbar ul li a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.dropdown {
+  float: left;
+  position: bottom;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  max-width: 200px;
+  box-shadow: 8px 8px 16px 8px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+</style>
+<script>
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.style.display === "block") {
+        openDropdown.style.display = "none";
+      }
+    }
+  }
+}
+
+</script>

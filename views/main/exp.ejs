@@ -1,0 +1,83 @@
+<section>
+    <style>
+        .container {
+            background-color: #FFF9D0;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            width: 100%;
+            margin : 50px 500px;
+            margin-bottom: 50px;
+            border : 2px solid  #B5C0D0;
+        }
+        .h2 {
+            color: #2c3e50;
+            margin: 0;
+            padding:  0;
+        }
+        .content {
+            margin-bottom: 20px;
+        }
+         h3 {
+            color: #34495e;
+            margin-top: 0;
+        }
+         h4 {
+            color: #3C5B6F;
+            margin-top: 10px;
+            font-weight: normal;
+        }
+        .hr{
+        margin : 0;
+        border: none;           /* Remove the default border */
+  height: 1px;            /* Set the height to 1px for a thin line */
+  background-color: #B5C0D0; /* Set the background color to black (or any color you prefer) */
+              /* Remove any default margins */
+  padding: 0;  
+  width : 100%; 
+      }
+
+      .a{
+        width : 12%;
+        padding-top: 0.4rem;
+        font-size:x-large;
+        padding-left: 6px;
+    }
+    .abc{
+        display : flex;
+        flex-direction: row;
+
+    }
+    .abc>img{
+        margin: 0;
+        padding : 0;
+        border-radius: 50%;
+    }
+    .aaa{
+        display: flex;
+        justify-content: flex-end;
+        gap : 15%;
+        padding-top : 0.3rem;
+        margin-right : 2%;
+    }
+
+
+    </style>
+
+    <div class="container">
+        <div class="header">
+        <h2><%= data.Title %> | <%= data.Event_name %></h2>
+            <h4>Last Updated : <%= data.createAt.toDateString() %></h4><hr class="hr">
+            
+            
+        </div>
+        <div class="content">
+            <h3><%= data.Body %></h3>
+        </div>
+    </div>
+
+</section> 
+
+
+

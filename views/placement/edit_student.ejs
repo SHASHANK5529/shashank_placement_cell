@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student Details</title>
+    <style>
+        a{
+            color:aqua;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 80px;
+            border: 2px solid rgba(255,255,255,0.18);
+            background: linear-gradient(135deg,rgba(255,255,255,0.1),rgba(255,255,255,0));
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            background-position: relative;
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+
+        }
+
+        .container h1 {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .container input[type="text"],
+        .container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+
+        .container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .container button:hover {
+            background-color: #003399;
+        }
+
+        .container .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+        label{
+    font-weight: bold;
+}
+    </style>
+</head>
+<body>
+    <div class = "container">
+    <h1>Edit Student Details</h1>
+    <form action="/placement/<%= student._id %>/edit_student?token=<%= token %>" method="POST">
+        <input type="hidden" name="token" value="<%= token %>">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="<%= student.username %>">
+        <br>
+        <label for="rollNumber">Roll Number:</label>
+        <input type="text" id="rollNumber" name="Roll_number" value="<%= student.Roll_number %>">
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="Password" value="<%= student.Password %>">
+        <br>
+        <label for="gender">Gender:</label>
+        <input type="text" id="gender" name="Gender" value="<%= student.Gender %>">
+        <br>
+        <label for="cgpa">CGPA:</label>
+        <input type="text" id="cgpa" name="CGPA" value="<%= student.CGPA %>">
+        <br>
+        <button type="submit">Update</button>
+    </form>
+    </div>
+</body>
+</html>

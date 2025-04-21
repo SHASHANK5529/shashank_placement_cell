@@ -1,0 +1,90 @@
+<section>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            margin: 50px 500px;
+            max-width: 600px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            color: #333;
+           
+        }
+        h3 {
+            color: #555;
+            margin : 0;
+            padding : 0;
+        }
+        h4 {
+            color: #666;
+            margin : 0;
+            padding : 0;
+            
+        }
+        form {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            background-color: #9BCF53;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #416D19;
+        }
+        button#deleteButton {
+            background-color: #dc3545;
+        }
+        button#deleteButton:hover {
+            background-color: #c82333;
+        }
+        .but{
+            display: flex;
+            justify-content: space-between;
+        }
+ 
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <h2><%= data.Title %> | <%= data.Event_name %></h2>
+      <p>Updated at:<%= data.createAt.toDateString() %></p><hr><br>
+        <h4><%= data.Body %></h4>
+        <div class="but">
+        <form id="postForm" action="/updatePost?token=<%=token %>" method="post">
+            <input type="hidden" value="<%= data._id %>" id="postId" name="postId">
+            <button type="submit" id="publishButton">Publish</button>
+        </form>
+        
+        
+        <form id="Delete" action="/delete_event/<%=data._id %>?token=<%= token %>" method="post">
+            <input type="hidden" value="<%= data._id %>" id="postId">
+            <input type="hidden" value="<%= token %>" id="token">
+            <button type="submit" id="deleteButton">RePost</button>
+        </form>
+        </div>
+    </div>
+        
+</body>
+</section>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbox</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        textarea{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .inbox {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007BFF;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            background-color: #EEEEEE;
+            padding: 20px;
+            margin-bottom: 40px; /* Increased margin-bottom for more space between messages */
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .message h3 {
+            margin-top: 0;
+            color: #555;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #555;
+            width : 95%;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        input[type="radio"] {
+            margin-left: 5px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            align-self: flex-start;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .no-messages {
+            text-align: center;
+            color: #999;
+            font-size: 18px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        @media (max-width: 600px) {
+            .inbox {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .message {
+                padding: 15px;
+                margin-bottom: 30px; /* Adjust margin-bottom for smaller screens */
+            }
+
+            input[type="text"],
+            textarea {
+                font-size: 13px;
+            }
+
+            input[type="submit"] {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <center><h1>Inbox</h1></center>
+    
+        <% 
+            function shouldDisplayMessage(message, rollNumber, messages_students) {
+                return message.Roll_number.includes(rollNumber) && !hasFilledMessage(messages_students, rollNumber, message.subject);
+            }
+
+            function hasFilledMessage(messages_students, rollNumber, eventName) {
+                return messages_students.some((message) => message.Roll_number === rollNumber && message.Event_name === eventName);
+            }
+
+            function hasUnfilledMessages(messages, rollNumber, messages_students) {
+                return messages.some((message) => shouldDisplayMessage(message, rollNumber, messages_students));
+            }
+        %>
+        <% messages.forEach((message) => { %>
+            <% if (shouldDisplayMessage(message, x.Roll_number, messages_students)) { %>
+                <div class="inbox">
+                <div class="message">
+                    <center><h3>Feedback form for: <%= message.subject %></h3></center>
+                    <form method="post" action="/inbox">
+                        <label for="Roll_number">Roll Number:
+                            <input type="text" value="<%= x.Roll_number %>" name="Roll_number" readonly>
+                        </label>
+
+                        <label for="Event_name">Company Name:
+                            <input type="text" value="<%= message.subject %>" name="Event_name" readonly>
+                        </label>
+
+                        <label for="Title">Title:
+                            <textarea id="Title" name="Title" rows="3" required></textarea>
+                        </label>
+                        
+                        <label for="Body">Feedback:
+                            <textarea id="Body" name="Body" rows="10" required></textarea>
+                        </label>
+                
+                        <label for="Completed">Completed:
+                            <input type="radio" name="Completed" id="Completed" required>
+                        </label>
+
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            <% } %>
+        </div>
+        <% }); %>
+        <% if (!hasUnfilledMessages(messages, x.Roll_number, messages_students)) { %>
+            <div class="inbox">
+            <div class="no-messages">
+                <center><h3>No New Messages</h3></center>
+            </div>
+            </div>
+        <% } %>
+        <script>
+        document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault(); // Prevent default form submission
+
+        const formData = new FormData(form); // Create a FormData object from the form
+
+        try {
+            const response = await fetch('/inbox', {
+                method: 'POST',
+                body: new URLSearchParams(formData) // Send form data as URL-encoded string
+            });
+
+            const data = await response.json();
+
+            let messageContainer = document.querySelector('#form-message');
+            if (!messageContainer) {
+                messageContainer = document.createElement('div');
+                messageContainer.setAttribute('id', 'form-message');
+                form.appendChild(messageContainer);
+            }
+
+            if (response.ok) {
+                messageContainer.textContent = data.message; // Display success message
+                messageContainer.style.color = 'green'; // Set success message color
+                // Optionally, reload the page after a short delay for a smoother UX
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000); // Reload after 2 seconds
+            } else {
+                messageContainer.textContent = data.message || 'Failed to submit feedback'; // Display error message
+                messageContainer.style.color = 'red'; // Set error message color
+            }
+        } catch (error) {
+            console.error(error);
+            let messageContainer = document.querySelector('#form-message');
+            if (!messageContainer) {
+                messageContainer = document.createElement('div');
+                messageContainer.setAttribute('id', 'form-message');
+                form.appendChild(messageContainer);
+            }
+            messageContainer.textContent = 'Error submitting feedback'; // Display generic error message
+            messageContainer.style.color = 'red'; // Set error message color
+        }
+    });
+});
+
+    </script>        
+</body>
+</html>

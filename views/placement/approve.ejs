@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiences</title>
+    <style>
+        /* Basic styling for articles section */
+        .articles {
+            padding: 20px;
+        }
+
+        /* Style for article headings */
+        .art_heading {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Container styling */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Event card styling */
+        .bg-white {
+            background-color: #fff;
+        }
+
+        .rounded-lg {
+            border-radius: 10px;
+        }
+
+        .shadow-lg {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .p-6 {
+            padding: 24px;
+        }
+
+        /* Event name styling */
+        .text-lg {
+            font-size: 18px;
+        }
+
+        .font-semibold {
+            font-weight: bold;
+        }
+
+        .text-zinc-900 {
+            color: #333;
+        }
+
+        /* Roll number styling */
+        .text-zinc-500 {
+            color: #666;
+        }
+
+        /* Button styling */
+        .adopt-now-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .adopt-now-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Basic styling for confirmation box */
+        .confirmation-box {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            z-index: 1000;
+        }
+
+        .confirmation-box.active {
+            display: block;
+        }
+
+        .confirmation-box button {
+            margin: 0 5px;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 4px;
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <section class="articles">
+        <h2 class="art_heading">Experiences</h2>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <% data.forEach(post => { %>
+                <% if (post.Completed == "on") { %>
+                    <div id="eventCardsContainer">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                            <div class="bg-white dark:bg-zinc-900 rounded-lg p-6 shadow-lg">
+                                <div class="flex flex-col items-center space-y-4">
+                                    <div class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+                                        Event Name: <%= post.Event_name %>
+                                    </div>
+                                    <div class="text-zinc-500 dark:text-zinc-300">
+                                        Student Roll Number: <%= post.Roll_number %>
+                                    </div><br>
+                                    <a href="ex/<%= post._id %>?token=<%= token %>">
+                                        <button class="adopt-now-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                            View
+                                        </button>
+                                    </a>
+                                    <button onclick="showConfirmationBox('<%= post._id %>')" class="adopt-now-btn bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                        Publish
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            <% }) %>
+        </div>
+
+        <div class="confirmation-box" id="confirmation-box">
+            <p>Are you sure you want to publish this event?</p>
+            <button onclick="confirmPublish()">Yes</button>
+            <button onclick="hideConfirmationBox()">No</button>
+        </div>
+        <div class="overlay" id="overlay"></div>
+
+        <div class="message" id="message"></div>
+
+        <script>
+            let publishEventId = null;
+
+            function showConfirmationBox(eventId) {
+                publishEventId = eventId;
+                document.getElementById('confirmation-box').classList.add('active');
+                document.getElementById('overlay').classList.add('active');
+            }
+
+            function hideConfirmationBox() {
+                publishEventId = null;
+                document.getElementById('confirmation-box').classList.remove('active');
+                document.getElementById('overlay').classList.remove('active');
+            }
+
+            function confirmPublish() {
+                if (publishEventId) {
+                    fetch('/publish_event/' + publishEventId, {
+                        method: 'POST'
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            showMessage("The event has been published successfully", 'success');
+                        } else {
+                            showMessage("Failed to publish the event", 'error');
+                        }
+                        hideConfirmationBox();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        showMessage("Failed to publish the event", 'error');
+                        hideConfirmationBox();
+                    });
+                }
+            }
+
+            function showMessage(message, type) {
+                const messageElement = document.getElementById('message');
+                messageElement.innerText = message;
+                messageElement.className = 'message ' + type;
+                setTimeout(() => {
+                    messageElement.innerText = '';
+                    messageElement.className = 'message';
+                }, 3000);
+            }
+        </script>
+    </section>
+</body>
+</html>
