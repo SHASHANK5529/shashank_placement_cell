@@ -1,4 +1,4 @@
-<section>
+<!-- <section>
     <style>
         .container {
             background-color: #FFF9D0;
@@ -80,4 +80,127 @@
 </section> 
 
 
-
+ -->
+ <section>
+    <style>
+      .container {
+        background-color: #fff9d0;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 700px;
+        width: 90%;
+        margin: 50px auto;
+        margin-bottom: 50px;
+        border: 2px solid #b5c0d0;
+      }
+  
+      .h2 {
+        color: #2c3e50;
+        margin: 0;
+        padding: 0;
+      }
+  
+      .content {
+        margin-bottom: 20px;
+      }
+  
+      h3 {
+        color: #34495e;
+        margin-top: 0;
+      }
+  
+      h4 {
+        color: #3c5b6f;
+        margin-top: 10px;
+        font-weight: normal;
+      }
+  
+      .hr {
+        margin: 0;
+        border: none;
+        height: 1px;
+        background-color: #b5c0d0;
+        padding: 0;
+        width: 100%;
+      }
+  
+      .a {
+        width: 12%;
+        padding-top: 0.4rem;
+        font-size: x-large;
+        padding-left: 6px;
+      }
+  
+      .abc {
+        display: flex;
+        flex-direction: row;
+      }
+  
+      .abc > img {
+        margin: 0;
+        padding: 0;
+        border-radius: 50%;
+      }
+  
+      .aaa {
+        display: flex;
+        justify-content: flex-end;
+        gap: 15%;
+        padding-top: 0.3rem;
+        margin-right: 2%;
+      }
+  
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+          margin: 20px;
+        }
+  
+        .aaa {
+          flex-direction: column;
+          gap: 10px;
+          align-items: flex-end;
+        }
+  
+        h2, h3, h4 {
+          font-size: 1rem;
+        }
+      }
+  
+      @media (max-width: 480px) {
+        .container {
+          padding: 15px;
+        }
+  
+        .abc {
+          flex-direction: column;
+          align-items: center;
+        }
+  
+        .abc > img {
+          width: 80px;
+          height: 80px;
+        }
+  
+        .a {
+          width: 100%;
+          padding-left: 0;
+          font-size: large;
+          text-align: center;
+        }
+      }
+    </style>
+  
+    <div class="container">
+      <div class="header">
+        <h2><%= data.Title %> | <%= data.Event_name %></h2>
+        <h4>Last Updated : <%= data.createAt.toDateString() %></h4>
+        <hr class="hr" />
+      </div>
+      <div class="content">
+        <h3><%= data.Body %></h3>
+      </div>
+    </div>
+  </section>
+  
